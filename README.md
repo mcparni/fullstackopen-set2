@@ -1,1 +1,1 @@
-# fullstackopen-set2
+# Fullstack Open 2018 - Osa2  
