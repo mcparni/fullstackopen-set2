@@ -1,17 +1,20 @@
 import React from 'react';
+import Filter from './components/Filter'
+import Persons from './components/Persons'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      persons: [
-        { 
-          name: 'Arto Hellas', 
-          number: '040-1231132'
-        }
+      persons: [ 
+          { name: 'Arto Hellas', number: '040-1123456' },
+          { name: 'Martti Tienari', number: '040-1223456' },
+          { name: 'Arto Järvinen', number: '040-1233456' },
+          { name: 'Lea Kutvonen', number: '040-1234456' }
       ],
       newName: '',
-      newNumber:''
+      newNumber: '',
+      filter: ''
     }
   }
 
@@ -35,7 +38,8 @@ class App extends React.Component {
     this.setState({
       persons,
       newName: '',
-      newNumber: '' 
+      newNumber: '',
+      filter: '' 
     })
   }
 
@@ -47,10 +51,20 @@ class App extends React.Component {
     this.setState({ newNumber: event.target.value })
   }
 
+  handleFilter = (event) => {
+    this.setState({ filter: event.target.value.toLowerCase() })
+  }
+
   render() {
+    const namesToShow =
+      this.state.filter === '' ?
+        this.state.persons :
+        this.state.persons.filter(person => person.name.toLowerCase().indexOf(this.state.filter.toLowerCase()) > -1 )
+
     return (
       <div>
         <h2>Puhelinluettelo</h2>
+        <Filter value={this.state.filter} onChange={this.handleFilter} />
         
         <form onSubmit={this.addName}>
           <div>
@@ -64,7 +78,7 @@ class App extends React.Component {
           </div>
         </form>
         <h2>Numerot</h2>
-          {this.state.persons.map(person => <p key={person.name + person.number}>{person.name}: {person.number}</p>)}
+          <Persons namesToShow={namesToShow} />
       </div>
     )
   }
