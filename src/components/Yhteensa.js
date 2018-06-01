@@ -9,6 +9,7 @@ const Yhteensa = ({kurssi}) => {
       accumulator + currentValue.tehtavia 
       ,0
   )
+
  
   return(
     <p>yhteensä {yhteensa} tehtävää</p>

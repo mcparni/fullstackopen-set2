@@ -4,15 +4,16 @@ import Sisalto from './Sisalto'
 import Yhteensa from './Yhteensa'
 
 
-
-
-
-const Kurssi = ({kurssi}) => {
+const Kurssi = ({kurssit}) => {
   return (
     <div>
-      <Otsikko kurssi={kurssi}/>
-      <Sisalto kurssi={kurssi} />
-      <Yhteensa kurssi={kurssi}  />
+    {kurssit.map(kurssi => (
+      <div key={kurssi.id + kurssi.nimi}>
+        <Otsikko key={kurssi.id} kurssi={kurssi} />
+        <Sisalto key={kurssi.osat.id} kurssi={kurssi} />
+        <Yhteensa key={kurssi.nimi} kurssi={kurssi} />
+      </div>
+    ))}
     </div>
   )
 }
