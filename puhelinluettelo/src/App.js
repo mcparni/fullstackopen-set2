@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios'
 import Filter from './components/Filter'
 import Persons from './components/Persons'
 
@@ -6,16 +7,20 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      persons: [ 
-          { name: 'Arto Hellas', number: '040-1123456' },
-          { name: 'Martti Tienari', number: '040-1223456' },
-          { name: 'Arto Järvinen', number: '040-1233456' },
-          { name: 'Lea Kutvonen', number: '040-1234456' }
-      ],
+      persons: [],
       newName: '',
       newNumber: '',
       filter: ''
     }
+  }
+
+
+  componentDidMount() {
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        this.setState({ persons: response.data })
+      })
   }
 
   exists = (name,number) => {
