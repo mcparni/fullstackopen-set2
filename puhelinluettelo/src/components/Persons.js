@@ -4,7 +4,8 @@ class Persons extends React.Component {
   render() {
     return(
       <div>
-        {this.props.namesToShow.map(person => <p key={person.name + person.number}>{person.name}: {person.number}</p>)}
+        <p>{this.props.name}: {this.props.number} <button onClick={this.props.removeHandler}>poista</button></p>
+        
       </div>
     )
   }
